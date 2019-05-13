@@ -5,7 +5,7 @@ public class Variables {
      * Allegro WebAPI key. It can be obtained by making an account in allegro.pl and asking for it through
      * http://allegro.pl/myaccount/webapi.php/.
      */
-    public static final String WEB_API_KEY = "f86986d0";
+    public static final String WEB_API_KEY = "";
 
     /**
      * Country code, 1 is for Poland.
