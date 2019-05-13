@@ -1,0 +1,8 @@
+rootProject.name = 'grupowanie_wyszukiwan'
+include ':allegroSOAP'
+include 'allegroAPI'
+include 'clustering'
+include 'web'
+include 'allegroSOAP'
+include 'serialization'
+include 'clusteringService'
