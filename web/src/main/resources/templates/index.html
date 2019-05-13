@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Grupowanie aukcji z allegro.pl</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+              th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+              rel="stylesheet" media="screen" />
+        <link href="../static/css/styles.css" th:href="@{css/styles.css}" rel="stylesheet" media="screen"/>
+        <link href="../static/images/favicon.ico" th:href="@{images/favicon.ico}" rel="icon"/>
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+                th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+        <script src="../static/js/loading.js" th:src="@{js/loading.js}"></script>
+    </head>
+
+    <body>
+        <section class="jumbotron text-center">
+            <div class="container">
+
+                <h1 class="jumbotron-heading">
+                    <img src="../static/images/logo.png" alt="Logo of project" class="logo"
+                         th:src="@{images/logo.png}"/>
+                    Grupowanie aukcji z <a href="https://allegro.pl/" class="allegro" target="_blank">allegro.pl</a>
+                </h1>
+                <br />
+                <br />
+                <p class="lead text-muted description">
+                    Aplikacja wykorzystuje klasteryzację elementów zbiorów tekstowych i graficznych do pogrupowania
+                    wyników wyszukiwań z serwisu Allegro na podstawie tytułów oraz miniaturek aukcji. <br/> <br/>
+                    W poniższym formularzu w polu <i>Czego szukasz?</i> należy podać wyszukiwaną frazę, a w polu obok
+                    stopień podobieństwa aukcji, które mają znaleźć się w tym samym folderze, podany w procentach.
+                </p>
+                <br />
+                <br />
+                <form action="#" th:action="@{/clusters}" th:object="${searchForm}" method="get" class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control search-input" placeholder="Czego szukasz?"
+                               required="required" th:field="*{value}"/>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Podobieństwo aukcji:</span>
+                        <input type="number" class="form-control input-similarity"
+                               required="required" th:field="*{similarity}" aria-describedby="percent" min="0" max="100"/>
+                        <span class="input-group-addon" id="percent">%</span>
+                    </div>
+                    <div class="input-group">
+                        <input class="btn btn-primary" type="submit" value="Szukaj" />
+                    </div>
+                    <p class="warning">
+                        UWAGA: wprowadzenie zbyt ogólnej frazy dla wyszukiwania może skutkować długim oczekiwaniem na wynik grupowania.
+                    </p>
+                </form>
+
+            </div>
+        </section>
+    </body>
+</html>

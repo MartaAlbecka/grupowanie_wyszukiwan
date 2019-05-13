@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Grupowanie aukcji z allegro.pl</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+              th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+              rel="stylesheet" media="screen" />
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"
+              th:href="@{/webjars/datatables/1.10.15/css/jquery.dataTables.min.css}"
+              rel="stylesheet" media="screen" />
+        <link href="../static/css/styles.css" th:href="@{css/styles.css}" rel="stylesheet" media="screen"/>
+        <link href="../static/images/favicon.ico" th:href="@{images/favicon.ico}" rel="icon"/>
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+                th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+        <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/js/bootstrap.min.js"
+                th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"
+                th:src="@{/webjars/datatables/1.10.15/js/jquery.dataTables.min.js}"></script>
+        <script src="../static/js/tables.js" th:src="@{js/tables.js}"></script>
+        <script src="../static/js/loading.js" th:src="@{js/loading.js}"></script>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html" th:href="@{/}">
+                        <img src="../static/images/logo.png" alt="Logo of project" class="logo-small"
+                             th:src="@{images/logo.png}"/>
+                        Grupowanie aukcji z allegro.pl
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse search">
+                    <form class="form-inline" action="#" th:action="@{/clusters}" th:object="${searchForm}"
+                          method="get">
+                        <div class="form-group">
+                            <input type="text" class="form-control search-input" placeholder="Czego szukasz?"
+                                   required="required" th:field="*{value}"/>
+                        </div>
+                        <div class="input-group">
+                            <input type="number" class="form-control input-similarity" placeholder="Podobieństwo aukcji"
+                                   required="required" th:field="*{similarity}" aria-describedby="percent"
+                                   min="0" max="100"/>
+                            <span class="input-group-addon" id="percent">%</span>
+                        </div>
+                        <div class="input-group">
+                            <input class="btn btn-primary" type="submit" value="Szukaj" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div th:if="${clusters}">
+                <h2>
+                    Wyniki grupowania
+                </h2>
+                <br/>
+                <table id="clusters">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Zdjęcie</th>
+                            <th>Tytuł aukcji</th>
+                            <th>Liczba przedmiotów</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cluster : ${clusters}" >
+                            <td>
+                                <span class="glyphicon glyphicon-plus" id="" th:id="${cluster.getId()}" style="cursor: pointer;"></span>
+                            </td>
+                            <td>
+                                <img src="" alt="Brak zdjęcia"
+                                     th:src="@{'data:image/png;base64, '+${cluster.getCentroid().getPhotoBase64()}}"/>
+                            </td>
+                            <td th:text="${cluster.getCentroid().getTitle()}">
+                                Tytuł aukcji
+                            </td>
+                            <td th:text="${cluster.getNumberOfItems()}">Liczba przedmiotów</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${emptyClusters}">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Brak wyników wyszukiwania dla podanej frazy
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${wrongSimilarity}">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Błędna wartość podobieństwa aukcji
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${wrongValue}">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Błędna wyszukiwana fraza
+            </div>
+        </div>
+    </body>
+
+</html>

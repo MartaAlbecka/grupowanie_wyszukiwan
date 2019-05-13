@@ -1,0 +1,91 @@
+.logo {
+    width: 125px;
+    height: 125px;
+}
+
+.logo-small {
+    width: 30px;
+    height: 30px;
+    display: inline !important;
+}
+
+.form {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.search {
+    padding-right: 0;
+    padding-top: 12px;
+    padding-bottom: 12px !important;
+    float: right;
+    font-size: 14px;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+th {
+    vertical-align: top !important;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.sort {
+    display: inline;
+}
+
+.td-sort {
+    border: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.table-sort {
+    margin-bottom: 0;
+}
+
+.search-input {
+    width: 450px !important;
+}
+
+.warning {
+    font-size: 15px !important;
+    color: #337ab7;
+    padding-top: 5px;
+}
+
+input:-webkit-autofill {
+    background-color: white !important;
+}
+
+.input-similarity {
+    width: 95px !important;
+}
+
+.first-row {
+    border-top: 0;
+}
+
+table {
+    margin-bottom: 0 !important;
+}
+
+.description {
+    font-size: 18px !important;
+    text-align: justify;
+    margin-right: auto;
+    margin-left: auto;
+    align: center;
+    width: 815px;
+}
+
+.allegro {
+    color: orange;
+}
